@@ -27,6 +27,8 @@ for i in range(1, len(points), 2):
 
 vertices += temp[::-1]
 
+print(len(vertices))
+
 output = ''
 
 for vertex in vertices:
