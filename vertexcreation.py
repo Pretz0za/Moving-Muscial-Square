@@ -1,66 +1,31 @@
 from distancecalculations import points
 
-odds = []
-evens = []
 
 vertices = [points[0]]
 
-for i, point in enumerate(points):
-    if (i+1) % 2 == 0:
-        evens.append(point)
-    else:
-        odds.append(point)
+temp = []
 
-for i in range(len(odds)):
-    if odds[i] == odds[-1]:
-        continue
-    if odds[i][0] == odds[i+1][0]:
-        continue
-    if odds[i][0] > odds[i+1][0]:
-        vertices.append(odds[i])
-        vertices.append((odds[i+1][0], odds[i][1]))       
-    else:
-        vertices.append((odds[i][0], odds[i+1][1]))
-        vertices.append(odds[i+1])
+for i in range(0, len(points), 2):
+        if i == 0:
+            vertices.append(points[i])
+        else:
+            vertices.append((points[i][0], points[i-1][1]))
+        if  points[i] == points[-1]:
+             vertices.append(points[i])
+        else:
+             vertices.append((points[i][0], points[i+1][1]))
 
-    
-if len(odds) > len(evens):
-    vertices.append((evens[-1][0], odds[-1][1]))
-else:
-    vertices.append((odds[-1][0], evens[-1][1]))
+for i in range(1, len(points), 2):
+        if i == 0:
+            temp.append(points[i])
+        else:
+            temp.append((points[i][0], points[i-1][1]))
+        if  points[i] == points[-1]:
+             temp.append(points[i])
+        else:
+             temp.append((points[i][0], points[i+1][1]))
 
-
-vertices.append(points[-1])
-
-evens.reverse()
-
-for i in range(len(evens)):
-    if evens[i] == evens[-1]:
-        continue
-    if evens[i][0] == evens[i+1][0]:
-        continue
-    if evens[i] == evens[-1]:
-        continue
-    if evens[i][0] == evens[i+1][0]:
-        continue
-    if evens[i][0] > evens[i+1][0]:
-        right = evens[i]
-        left = evens [i+1]
-        vertices.append((right[0], left[1]))
-        vertices.append(left)
-        
-    else:
-        right = evens[i+1]
-        left = evens[i]    
-        vertices.append(left)    
-        vertices.append((right[0], left[1]))
-        
-
-
-
-vertices.append((points[1][0], 0))
-
-
+vertices += temp[::-1]
 
 output = ''
 

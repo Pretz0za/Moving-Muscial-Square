@@ -13,4 +13,3 @@ output = ''
 
 for point in points:
     output += '{x: ' + str(point[0]) + ', y: ' + str(point[1]) + '},'
-print(output)
