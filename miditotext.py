@@ -20,19 +20,21 @@ for i in mididict:
 # put note, starttime, stoptime, as nested list in a list. # format is [type, note, time, channel]
     mem2=[]
     if i['type'] == 'note_on':
-        mem2.append(i['type'])
-        mem2.append(i['note'])
-        mem2.append(i['time'])
-        mem2.append(i['channel'])
-        output.append(mem2)
-# put timesignatures
-    if i['type'] == 'time_signature':
-        mem2.append(i['type'])
-        mem2.append(i['numerator'])
-        mem2.append(i['denominator'])
         mem2.append(i['time'])
         output.append(mem2)
 # viewing the midimessages.
-for i in output:
-    print(i)
-print(mid.ticks_per_beat)
+
+
+
+for i in range(len(output)):
+    output[i] = output[i][0]
+
+output = list(dict.fromkeys(output))
+
+output.reverse()
+
+for i in range(len(output) - 1):
+    output[i] -= output[i+1]
+
+output.reverse()
+
